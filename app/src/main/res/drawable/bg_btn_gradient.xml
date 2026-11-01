@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- [تمت الإضافة] زر أساسي متدرج يستخدم في كل الشاشات -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- التدرج من الأزرق الأساسي إلى الأزرق الفاتح حسب الهوية -->
+    <gradient
+        android:startColor="@color/primary_blue"
+        android:endColor="@color/secondary_blue"
+        android:angle="0" />
+    <corners android:radius="@dimen/corner_medium" />
+    <padding android:bottom="12dp" android:left="16dp" android:right="16dp" android:top="12dp" />
+</shape>

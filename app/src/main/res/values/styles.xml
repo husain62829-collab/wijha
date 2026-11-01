@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- ============================================== -->
+    <!-- [تمت الإضافة] نظام الطباعة الموحد بناءً على خط IBM Plex Sans Arabic -->
+    <!-- ============================================== -->
+
+    <!-- 🟢 النمط الأساسي (Base Style) - يورث منه كل شيء -->
+    <style name="TextAppearance.Wajha.Base" parent="TextAppearance.Material3.BodyLarge">
+        <item name="fontFamily">@font/ibm_plex_regular</item>
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
+
+    <!-- 1️⃣ العناوين الرئيسية جداً (مثل: "تذكرة السفر" أو "ماهي وجهتك") -->
+    <style name="TextAppearance.Wajha.TitleHuge" parent="TextAppearance.Wajha.Base">
+        <item name="fontFamily">@font/ibm_plex_bold</item>
+        <item name="android:textSize">@dimen/text_size_title_huge</item> <!-- 26sp -->
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <!-- 2️⃣ عناوين الأقسام (مثل: "خدمات إضافية" أو "نوع الرحلة") -->
+    <style name="TextAppearance.Wajha.TitleSection" parent="TextAppearance.Wajha.Base">
+        <item name="fontFamily">@font/ibm_plex_semibold</item>
+        <item name="android:textSize">@dimen/text_size_headline</item> <!-- 20sp -->
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <!-- 3️⃣ العناوين الفرعية (مثل: "نقطة المغادرة" أو "رحلة الذهاب") -->
+    <style name="TextAppearance.Wajha.Subtitle" parent="TextAppearance.Wajha.Base">
+        <item name="fontFamily">@font/ibm_plex_semibold</item>
+        <item name="android:textSize">@dimen/text_size_subtitle</item> <!-- 18sp -->
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <!-- 4️⃣ النصوص الأساسية (للفقرات والمعلومات) -->
+    <style name="TextAppearance.Wajha.Body" parent="TextAppearance.Wajha.Base">
+        <item name="fontFamily">@font/ibm_plex_regular</item>
+        <item name="android:textSize">@dimen/text_size_body</item> <!-- 16sp -->
+    </style>
+
+    <!-- 5️⃣ النصوص الثانوية (مثل: أكواد المطارات HOF, RUH أو "للشخص الواحد") -->
+    <style name="TextAppearance.Wajha.BodySmall" parent="TextAppearance.Wajha.Base">
+        <item name="fontFamily">@font/ibm_plex_regular</item>
+        <item name="android:textSize">@dimen/text_size_body_small</item> <!-- 14sp -->
+        <item name="android:textColor">@color/text_secondary</item> <!-- لون رمادي -->
+    </style>
+
+    <!-- 6️⃣ أزرار التطبيق (Buttons) -->
+    <style name="TextAppearance.Wajha.Button" parent="TextAppearance.Wajha.Base">
+        <item name="fontFamily">@font/ibm_plex_semibold</item>
+        <item name="android:textSize">@dimen/text_size_subtitle</item> <!-- 18sp -->
+        <item name="android:textColor">@color/text_on_primary</item> <!-- أبيض -->
+        <item name="android:textStyle">bold</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+</resources>

@@ -1,5 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <!-- ============================================== -->
+    <!-- [تمت الإضافة] الهوية البصرية الجديدة للمشروع -->
+    <!-- ============================================== -->
+
+    <!-- 🎨 الألوان الأساسية (Primary & Secondary) -->
+    <color name="primary_blue">#0C87F2</color>       <!-- أزرق أساسي: للأزرار والروابط النشطة -->
+    <color name="secondary_blue">#1BA0F2</color>     <!-- أزرق فاتح: للتدرجات أو العناصر الثانوية -->
+    <color name="light_blue">#8DC3F2</color>         <!-- أزرق باهت: للخلفيات الفاتحة أو التظليل -->
+
+    <color name="primary_dark_green">#025951</color> <!-- أخضر داكن: للعناوين والنصوص الأساسية -->
+    <color name="accent_mint_green">#0FBF8D</color>  <!-- أخضر نعناعي: للأزرار الثانوية والتأكيدات -->
+
+    <!-- 🎨 ألوان الخلفيات (Backgrounds) -->
+    <color name="background_app">#F8F9FA</color>     <!-- خلفية الشاشة: أبيض مائل للرمادي الفاتح جداً -->
+    <color name="surface_white">#FFFFFF</color>      <!-- خلفية البطاقات والحقول -->
+    <color name="surface_subtle">#F0F6FA</color>     <!-- خلفية الأقسام الفرعية (مشتقة من الأزرق الفاتح) -->
+    <color name="surface_gray">#F5F5F5</color>       <!-- خلفية شريط معلومات المسافر -->
+
+    <!-- 🎨 ألوان النصوص (Text) -->
+    <color name="text_primary">@color/primary_dark_green</color> <!-- النص الأساسي (أخضر داكن) -->
+    <color name="text_secondary">#6C757D</color>                 <!-- نص ثانوي (رمادي داكن) -->
+    <color name="text_on_primary">#FFFFFF</color>                <!-- نص فوق خلفية داكنة -->
+
+    <!-- 🎨 الحالات والحدود (States & Borders) -->
+    <color name="success_green">@color/accent_mint_green</color>
+    <color name="error_red">#DC3545</color>
+    <color name="border_light">#DEE2E6</color>
+    <color name="divider_gray">#E9ECEF</color>
+
+    <!-- ============================================== -->
+    <!-- [تم الحذف] الألوان القديمة التي لا تتوافق مع الهوية -->
+    <!-- <color name="primary_dark">#174C68</color> -->
+    <!-- <color name="accent_teal">#26C6DA</color> -->
+    <!-- ============================================== -->
 </resources>
