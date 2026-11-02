@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+
+    <!-- لون الخلفية الأبيض المعتمد في الهوية -->
+    <solid android:color="@color/surface_white" />
+
+    <!-- جعل الحواف العلوية دائرية فقط لتعطي شكل الانسدال فوق الصورة -->
+    <corners
+        android:topLeftRadius="30dp"
+        android:topRightRadius="30dp"
+        android:bottomLeftRadius="0dp"
+        android:bottomRightRadius="0dp" />
+
+</shape>

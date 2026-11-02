@@ -87,7 +87,6 @@
                 android:textColor="@color/text_primary"
                 android:paddingHorizontal="20dp"
                 android:layout_marginBottom="24dp"
-                android:drawableEnd="@android:drawable/ic_lock_idle_lock"
                 android:drawableTint="@color/primary_dark_green"
                 android:inputType="textPassword"/>
 

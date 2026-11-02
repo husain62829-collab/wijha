@@ -1,145 +1,534 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+  [تم التعديل]
+  - تم تغيير الخلفية من اللون الثابت #F4F7F8 إلى صورة @drawable/background.
+  - تمت إضافة layoutDirection="rtl" لضبط اتجاه الصفحة.
+-->
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F4F7F8"
+    android:background="@drawable/background"
+    android:layoutDirection="rtl"
     android:fillViewport="true">
 
+    <!-- [تم التعديل] تم تغيير الـ padding من 12dp إلى @dimen/space_normal -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="12dp">
+        android:padding="@dimen/space_normal">
 
-        <!-- عنوان الصفحة -->
+        <!--
+          [تم الحذف] تم حذف المربع الداكن القديم (الذي كان يحتوي على "ملخص طلبك" و "راجع البيانات").
+          [تمت الإضافة] تم استبداله بشعار التطبيق (logowords) ليطابق صفحة التذكرة.
+        -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp">
+            <ImageView
+                android:layout_width="150dp"
+                android:layout_height="80dp"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/logowords" />
+        </RelativeLayout>
+
+        <!--
+          [تمت الإضافة] بطاقة بيضاء رئيسية جديدة (bg_card_white) بظل (elevation)
+          لتحتوي على كل المحتوى بدلاً من العناصر المتناثرة في الملف القديم.
+        -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#153D4A"
+            android:background="@drawable/bg_card_white"
             android:orientation="vertical"
-            android:padding="18dp">
+            android:elevation="8dp"
+            android:padding="@dimen/space_normal">
 
+            <!--
+              [تم التعديل] العنوان القديم كان "ملخص طلبك" بحجم 24sp ولون أبيض.
+              الآن أصبح "تذكرة السفر" بحجم @dimen/text_size_title_huge ولون @color/text_primary.
+            -->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="ملخص طلبك"
-                android:textColor="#FFFFFF"
-                android:textSize="24sp"
-                android:textStyle="bold"/>
+                android:text="تذكرة السفر"
+                android:textSize="@dimen/text_size_title_huge"
+                android:textStyle="bold"
+                android:textColor="@color/text_primary"
+                android:gravity="right"
+                android:layout_marginBottom="@dimen/space_normal" />
 
-            <TextView
+            <!--
+              [تمت الإضافة] قسم جديد لبيانات الرحلة (الخطوط الجوية ورقم الرحلة).
+              لم يكن موجوداً في الملف القديم.
+            -->
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:text="راجع البيانات قبل التأكيد"
-                android:textColor="#E2F0EF"
-                android:textSize="13sp"/>
-        </LinearLayout>
+                android:orientation="horizontal"
+                android:gravity="right"
+                android:layout_marginBottom="@dimen/space_small">
+                <TextView
+                    android:id="@+id/tvAirline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="نوع الرحلة"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="@dimen/text_size_caption"
+                    android:layout_marginEnd="@dimen/space_small"/>
+                <TextView
+                    android:id="@+id/tvFlightNum"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="تفاصيل الخدمة"
-            android:textColor="#153D4A"
-            android:textSize="20sp"
-            android:textStyle="bold"/>
-
-        <!-- تفاصيل الطلب -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:background="#FFFFFF"
-            android:orientation="vertical"
-            android:padding="16dp">
-
-            <TextView
+            <!--
+              [تمت الإضافة] قسم رحلة الذهاب (رحلة الذهاب ✈) بالكامل.
+              يحتوي على تفاصيل الوجهة، الطائرة، والوقت.
+            -->
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="اسم العميل"
-                android:textColor="#617A80"
-                android:textSize="13sp"/>
+                android:background="@drawable/bg_surface_light_blue"
+                android:orientation="vertical"
+                android:padding="@dimen/space_medium"
+                android:layout_marginBottom="@dimen/space_medium">
 
-            <TextView
-                android:id="@+id/txtCustomerName"
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="رحلة الذهاب ✈"
+                    android:textColor="@color/text_primary"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/text_size_body"
+                    android:gravity="right"
+                    android:layout_marginBottom="@dimen/space_small" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="3">
+
+                    <!-- [تمت الإضافة] الوجهة (اليمين) -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:gravity="right">
+                        <TextView
+                            android:id="@+id/tvDestName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="الوجهة"
+                            android:textColor="@color/text_primary"
+                            android:textStyle="bold"
+                            android:textSize="@dimen/text_size_subtitle" />
+                        <TextView
+                            android:id="@+id/tvDestIataOut"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="(APT)"
+                            android:textColor="@color/text_secondary"
+                            android:textSize="@dimen/text_size_body_small" />
+                        <TextView
+                            android:id="@+id/tvDepDate"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="2026/10/02"
+                            android:textColor="@color/text_primary"
+                            android:textSize="@dimen/text_size_body_small" />
+                    </LinearLayout>
+
+                    <!-- [تمت الإضافة] الطائرة والوقت -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:gravity="center">
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:src="@android:drawable/ic_menu_send"
+                            app:tint="@color/primary_blue" />
+                        <TextView
+                            android:id="@+id/tvDurationDep"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="2h 50m"
+                            android:textSize="@dimen/text_size_caption"
+                            android:textColor="@color/text_secondary" />
+                    </LinearLayout>
+
+                    <!-- [تمت الإضافة] نقطة المغادرة (اليسار) -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:gravity="left">
+                        <TextView
+                            android:id="@+id/tvOriginNameOut"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="الأحساء"
+                            android:textColor="@color/text_primary"
+                            android:textStyle="bold"
+                            android:textSize="@dimen/text_size_subtitle" />
+                        <TextView
+                            android:id="@+id/tvOriginIataOut"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="(HOF)"
+                            android:textColor="@color/text_secondary"
+                            android:textSize="@dimen/text_size_body_small" />
+                        <TextView
+                            android:id="@+id/tvDepTime"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="05:55 م"
+                            android:textColor="@color/text_primary"
+                            android:textSize="@dimen/text_size_body_small" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            <!--
+              [تمت الإضافة] قسم رحلة العودة (رحلة العودة ✈) بالكامل.
+              لم يكن موجوداً في الملف القديم.
+            -->
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="3dp"
-                android:text="—"
-                android:textColor="#153D4A"
+                android:background="@drawable/bg_surface_light_blue"
+                android:orientation="vertical"
+                android:padding="@dimen/space_medium"
+                android:layout_marginBottom="@dimen/space_normal">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="رحلة العودة ✈"
+                    android:textColor="@color/text_primary"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/text_size_body"
+                    android:gravity="right"
+                    android:layout_marginBottom="@dimen/space_small" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="3">
+
+                    <!-- [تمت الإضافة] الوجهة في العودة -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:gravity="right">
+                        <TextView
+                            android:id="@+id/tvDestNameReturn"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="الأحساء"
+                            android:textColor="@color/text_primary"
+                            android:textStyle="bold"
+                            android:textSize="@dimen/text_size_subtitle" />
+                        <TextView
+                            android:id="@+id/tvDestIataRet"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="(HOF)"
+                            android:textColor="@color/text_secondary"
+                            android:textSize="@dimen/text_size_body_small" />
+                        <TextView
+                            android:id="@+id/tvRetDate"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="2026/10/09"
+                            android:textColor="@color/text_primary"
+                            android:textSize="@dimen/text_size_body_small" />
+                    </LinearLayout>
+
+                    <!-- [تمت الإضافة] الطائرة والوقت -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:gravity="center">
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:src="@android:drawable/ic_menu_send"
+                            app:tint="@color/primary_blue" />
+                        <TextView
+                            android:id="@+id/tvDurationRet"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="2h 50m"
+                            android:textSize="@dimen/text_size_caption"
+                            android:textColor="@color/text_secondary" />
+                    </LinearLayout>
+
+                    <!-- [تمت الإضافة] نقطة الوصول في العودة -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:gravity="left">
+                        <TextView
+                            android:id="@+id/tvOriginNameRet"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="الوجهة"
+                            android:textColor="@color/text_primary"
+                            android:textStyle="bold"
+                            android:textSize="@dimen/text_size_subtitle" />
+                        <TextView
+                            android:id="@+id/tvOriginIataRet"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="(APT)"
+                            android:textColor="@color/text_secondary"
+                            android:textSize="@dimen/text_size_body_small" />
+                        <TextView
+                            android:id="@+id/tvRetTime"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="12:45 م"
+                            android:textColor="@color/text_primary"
+                            android:textSize="@dimen/text_size_body_small" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            <!--
+              [تم الحذف] تم حذف قسم "تفاصيل الطلب" القديم الذي كان يحتوي على (اسم العميل، الخدمة المختارة، الإضافات).
+              [تمت الإضافة] تم استبداله بشريط معلومات المسافر (الاسم، المقعد، الدرجة، الوزن).
+            -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="@dimen/space_medium"
+                android:weightSum="4"
+                android:background="@color/surface_gray">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:gravity="center">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="المسافر"
+                        android:textSize="@dimen/text_size_caption"
+                        android:textColor="@color/text_secondary"/>
+                    <TextView
+                        android:id="@+id/tvPassengerName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="اسم المسافر"
+                        android:textStyle="bold"
+                        android:textColor="@color/text_primary"/>
+                </LinearLayout>
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/divider_gray"/>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:gravity="center">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="المقعد"
+                        android:textSize="@dimen/text_size_caption"
+                        android:textColor="@color/text_secondary"/>
+                    <TextView
+                        android:id="@+id/tvSeatNumber"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="22A"
+                        android:textStyle="bold"
+                        android:textColor="@color/text_primary"/>
+                </LinearLayout>
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/divider_gray"/>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:gravity="center">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="الدرجة"
+                        android:textSize="@dimen/text_size_caption"
+                        android:textColor="@color/text_secondary"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="الاقتصادية"
+                        android:textStyle="bold"
+                        android:textColor="@color/text_primary"/>
+                </LinearLayout>
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/divider_gray"/>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:gravity="center">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="الوزن"
+                        android:textSize="@dimen/text_size_caption"
+                        android:textColor="@color/text_secondary"/>
+                    <TextView
+                        android:id="@+id/tvWeight"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="B2"
+                        android:textStyle="bold"
+                        android:textColor="@color/text_primary"/>
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- [بقي كما هو معلقاً] الباركود (لم يتم تفعيله في الملف الثاني) -->
+            <!--
+            <ImageView
+                android:layout_width="286dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="#FFFFFF"
+                android:padding="10dp"
+                android:scaleType="fitXY"
+                android:src="@android:drawable/barcd" />
+            <TextView
+                android:id="@+id/tvBarcodeText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="UZUMYMWAEZAKMI"
+                android:gravity="center"
+                android:letterSpacing="0.2"
+                android:layout_marginBottom="16dp"/>
+            -->
+
+            <!--
+              [تم التعديل] قسم السعر: الملف القديم لم يكن يحتوي على قسم سعر منفصل بهذا الشكل.
+              الآن تمت إضافة قسم السعر الإجمالي والخدمات الإضافية داخل حاوية bg_surface_light_blue.
+            -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@drawable/bg_surface_light_blue"
+                android:padding="@dimen/space_medium"
+                android:layout_marginBottom="@dimen/space_normal"
+                android:weightSum="2">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:gravity="right">
+                    <TextView
+                        android:id="@+id/tvTotalPrice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="السعر الإجمالي: 8,750 ريال"
+                        android:textColor="@color/text_primary"
+                        android:textStyle="bold"
+                        android:textSize="@dimen/text_size_subtitle" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="للشخص الواحد"
+                        android:textSize="@dimen/text_size_caption"
+                        android:textColor="@color/text_secondary" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:gravity="left">
+                    <TextView
+                        android:id="@+id/tvHotelService"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="✔ حجز فندق"
+                        android:textColor="@color/success_green"
+                        android:textStyle="bold"
+                        android:visibility="gone"/>
+                    <TextView
+                        android:id="@+id/tvAirportService"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="✔ استقبال من المطار"
+                        android:textColor="@color/success_green"
+                        android:textStyle="bold"
+                        android:visibility="gone"/>
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- [بقي كما هو معلقاً] زر تحميل التذكرة -->
+            <!--
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:background="@drawable/bg_btn_gradient"
+                android:text="تحميل التذكرة ⬇"
+                android:textColor="@color/text_on_primary"
                 android:textSize="18sp"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                android:gravity="center"
+                android:layout_marginBottom="12dp"/>
+            -->
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="12dp"
-                android:layout_marginBottom="12dp"
-                android:background="#E2EBEC"/>
-
+            <!--
+              [تم الحذف] زر "تأكيد الطلب" (btnConfirm) وزر "العودة لتعديل الاختيارات" (btnBack) القديمين.
+              [تمت الإضافة] تم استبدالهما بزر واحد "العودة إلى الصفحة الرئيسية" (btnReturnHome).
+            -->
             <TextView
+                android:id="@+id/btnReturnHome"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="الخدمة المختارة"
-                android:textColor="#617A80"
-                android:textSize="13sp"/>
+                android:layout_height="@dimen/height_main_button"
+                android:background="@drawable/bg_btn_outlined"
+                android:text="العودة إلى الصفحة الرئيسية 🏠"
+                android:textColor="@color/text_primary"
+                android:textSize="@dimen/text_size_body"
+                android:textStyle="bold"
+                android:gravity="center" />
 
-            <TextView
-                android:id="@+id/txtService"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="3dp"
-                android:text="—"
-                android:textColor="#153D4A"
-                android:textSize="18sp"
-                android:textStyle="bold"/>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="12dp"
-                android:layout_marginBottom="12dp"
-                android:background="#E2EBEC"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="الإضافات المختارة"
-                android:textColor="#617A80"
-                android:textSize="13sp"/>
-
-            <TextView
-                android:id="@+id/txtExtras"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="3dp"
-                android:text="—"
-                android:textColor="#153D4A"
-                android:textSize="16sp"/>
         </LinearLayout>
-
-        <Button
-            android:id="@+id/btnConfirm"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_marginTop="16dp"
-            android:backgroundTint="#147C76"
-            android:text="تأكيد الطلب"
-            android:textAllCaps="false"
-            android:textColor="#FFFFFF"
-            android:textSize="15sp"/>
-
-        <Button
-            android:id="@+id/btnBack"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_marginTop="8dp"
-            android:backgroundTint="#DDECE9"
-            android:text="العودة لتعديل الاختيارات"
-            android:textAllCaps="false"
-            android:textColor="#153D4A"
-            android:textSize="14sp"/>
-
     </LinearLayout>
 </ScrollView>
