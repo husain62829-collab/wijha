@@ -1,147 +1,45 @@
 package com.example.wijha;
 
-import android.app.Activity;
-import android.os.Bundle;
 import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
-import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.CompoundButton;
+import androidx.appcompat.app.AppCompatActivity;
 
-public class MainActivity extends Activity {
+public class MainActivity extends AppCompatActivity { // <--- لاحظي أن الاسم Username هنا مطابق لاسم الملف
 
-    EditText editName;
-    RadioGroup radioGroupServices;
-    CheckBox checkExtra1, checkExtra2;
-    TextView txtSelection;
-    Button btnNext;
+    private EditText etUsername, etPassword;
+    private Button btnLogin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        editName = findViewById(R.id.editName);
-        radioGroupServices =
-                findViewById(R.id.radioGroupServices);
-        checkExtra1 = findViewById(R.id.checkExtra1);
-        checkExtra2 = findViewById(R.id.checkExtra2);
-        txtSelection = findViewById(R.id.txtSelection);
-        btnNext = findViewById(R.id.btnNext);
+        etUsername = findViewById(R.id.etUsername);
+        etPassword = findViewById(R.id.etPassword);
+        btnLogin = findViewById(R.id.btnLogin);
 
-        // الاستجابة لاختيار الإضافات
-        CompoundButton.OnCheckedChangeListener listener =
-                (buttonView, isChecked) -> {
+        btnLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String username = etUsername.getText().toString().trim();
+                String password = etPassword.getText().toString().trim();
 
-                    String message =
-                            buttonView.getText().toString();
+                if (username.isEmpty() || password.isEmpty()) {
+                    Toast.makeText(MainActivity.this, "الرجاء إدخال اسم المستخدم وكلمة المرور", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(MainActivity.this, "تم تسجيل الدخول بنجاح", Toast.LENGTH_SHORT).show();
 
-                    if (isChecked) {
-                        message += " تمت إضافتها";
-                    } else {
-                        message += " تمت إزالتها";
-                    }
-
-                    Toast.makeText(
-                            MainActivity.this,
-                            message,
-                            Toast.LENGTH_SHORT
-                    ).show();
-
-                    updateExtras();
-                };
-
-        checkExtra1.setOnCheckedChangeListener(listener);
-        checkExtra2.setOnCheckedChangeListener(listener);
-
-        // الاستجابة لاختيار الخدمة
-        radioGroupServices.setOnCheckedChangeListener(
-                (group, checkedId) -> {
-
-                    RadioButton selected =
-                            findViewById(checkedId);
-
-                    if (selected != null) {
-                        Toast.makeText(
-                                MainActivity.this,
-                                "تم اختيار: " + selected.getText(),
-                                Toast.LENGTH_SHORT
-                        ).show();
-                    }
-                });
-
-        // الانتقال إلى الصفحة الثانية
-        btnNext.setOnClickListener(v -> {
-
-            String name =
-                    editName.getText().toString().trim();
-
-            if (name.isEmpty()) {
-                editName.setError("يرجى إدخال الاسم");
-                editName.requestFocus();
-                return;
+                    // الانتقال إلى MainActivity
+                    Intent intent = new Intent(MainActivity.this, BookingActivity.class);
+                    intent.putExtra("USERNAME_KEY", username);
+                    startActivity(intent);
+                    finish();
+                }
             }
-
-            int selectedId =
-                    radioGroupServices.getCheckedRadioButtonId();
-
-            if (selectedId == -1) {
-                Toast.makeText(
-                        MainActivity.this,
-                        "يرجى اختيار الخدمة",
-                        Toast.LENGTH_SHORT
-                ).show();
-                return;
-            }
-
-            RadioButton selected =
-                    findViewById(selectedId);
-
-            Intent intent = new Intent(
-                    MainActivity.this,
-                    DetailsActivity.class
-            );
-
-            intent.putExtra("name", name);
-            intent.putExtra(
-                    "service",
-                    selected.getText().toString()
-            );
-            intent.putExtra("extras", getExtras());
-
-            startActivity(intent);
         });
-    }
-
-    private String getExtras() {
-
-        String extras = "";
-
-        if (checkExtra1.isChecked()) {
-            extras = checkExtra1.getText().toString();
-        }
-
-        if (checkExtra2.isChecked()) {
-            if (!extras.isEmpty()) {
-                extras += "، ";
-            }
-            extras += checkExtra2.getText().toString();
-        }
-
-        if (extras.isEmpty()) {
-            return "لا توجد إضافات";
-        }
-
-        return extras;
-    }
-
-    private void updateExtras() {
-        txtSelection.setText(
-                "الإضافات: " + getExtras()
-        );
     }
 }
